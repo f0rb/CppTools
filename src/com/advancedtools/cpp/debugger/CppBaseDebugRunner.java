@@ -32,7 +32,7 @@ public abstract class CppBaseDebugRunner<T extends BaseCppConfiguration> extends
     final RunProfile runProfile = env.getRunProfile();
 
     final XDebugSession debugSession =
-        XDebuggerManager.getInstance(project).startSession(this, env, runContentDescriptor, new XDebugProcessStarter() {
+        XDebuggerManager.getInstance(project).startSessionAndShowTab("env", runContentDescriptor, new XDebugProcessStarter() {
           @NotNull
           public XDebugProcess start(@NotNull final XDebugSession session) {
             return new CppDebugProcess(session, CppBaseDebugRunner.this, (BaseCppConfiguration)runProfile);

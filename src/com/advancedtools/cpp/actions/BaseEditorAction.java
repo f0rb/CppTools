@@ -3,10 +3,7 @@ package com.advancedtools.cpp.actions;
 
 import com.advancedtools.cpp.psi.CppFile;
 import com.advancedtools.cpp.communicator.Communicator;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataConstants;
-import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
@@ -55,8 +52,8 @@ public abstract class BaseEditorAction extends AnAction {
   }
 
   static PsiFile findFileFromDataContext(DataContext context) {
-    PsiFile file = (PsiFile)context.getData(DataConstants.PSI_FILE);
-    final Project project = (Project) context.getData(DataConstants.PROJECT);
+    PsiFile file = context.getData(LangDataKeys.PSI_FILE);
+    final Project project = context.getData(LangDataKeys.PROJECT);
     final Editor editor = findEditorFromDataContext(context);
 
     if (file == null && editor != null) {

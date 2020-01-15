@@ -12,12 +12,16 @@ import com.intellij.psi.*;
 import com.intellij.util.Processor;
 import com.intellij.util.QueryExecutor;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author maxim
  */
 public class CppDefinitionSearcher implements QueryExecutor<PsiElement, PsiElement> {
-  public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer) {
+
+
+    @Override
+    public boolean execute(@NotNull PsiElement sourceElement, @NotNull Processor<? super PsiElement> consumer) {
     if (sourceElement instanceof PsiNamedElement &&
       sourceElement.getLanguage() == CppSupportLoader.CPP_LANGUAGE) {
       // todo before write action listener to cancel long read action

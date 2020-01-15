@@ -7,7 +7,6 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,8 +21,10 @@ public class CppSimpleEditorHighlightingPassFactory extends CppHighlightingPassF
   protected void register(TextEditorHighlightingPassRegistrar instance) {
     instance.registerTextEditorHighlightingPass(
       this,
-      TextEditorHighlightingPassRegistrar.FIRST,
-      0xff
+      TextEditorHighlightingPassRegistrar.Anchor.FIRST,
+      0xff,
+      false,
+      false
     );
   }
 

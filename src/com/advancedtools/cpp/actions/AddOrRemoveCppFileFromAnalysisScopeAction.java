@@ -3,10 +3,7 @@ package com.advancedtools.cpp.actions;
 
 import com.advancedtools.cpp.CppSupportLoader;
 import com.advancedtools.cpp.communicator.Communicator;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataConstants;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -18,8 +15,8 @@ import java.util.Set;
  */
 public class AddOrRemoveCppFileFromAnalysisScopeAction extends AnAction {
   public void actionPerformed(AnActionEvent anActionEvent) {
-    final VirtualFile file = (VirtualFile) anActionEvent.getDataContext().getData(DataConstants.VIRTUAL_FILE);
-    final Project project = (Project) anActionEvent.getDataContext().getData(DataConstants.PROJECT);
+    final VirtualFile file = anActionEvent.getDataContext().getData(LangDataKeys.VIRTUAL_FILE);
+    final Project project = anActionEvent.getDataContext().getData(LangDataKeys.PROJECT);
     assert file != null;
     assert project != null;
 
@@ -31,8 +28,8 @@ public class AddOrRemoveCppFileFromAnalysisScopeAction extends AnAction {
   }
 
   public void update(AnActionEvent anActionEvent) {
-    final VirtualFile file = (VirtualFile) anActionEvent.getDataContext().getData(DataConstants.VIRTUAL_FILE);
-    final Project project = (Project) anActionEvent.getDataContext().getData(DataConstants.PROJECT);
+    final VirtualFile file = anActionEvent.getDataContext().getData(LangDataKeys.VIRTUAL_FILE);
+    final Project project = anActionEvent.getDataContext().getData(LangDataKeys.PROJECT);
     final Presentation presentation = anActionEvent.getPresentation();
 
     if (project == null ||

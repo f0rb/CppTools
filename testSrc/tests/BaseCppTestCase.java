@@ -34,7 +34,7 @@ abstract class BaseCppTestCase extends TestCase {
   protected void setUp() throws Exception {
     super.setUp();
     final IdeaTestFixtureFactory fixtureFactory = IdeaTestFixtureFactory.getFixtureFactory();
-    final TestFixtureBuilder<IdeaProjectTestFixture> testFixtureBuilder = fixtureFactory.createFixtureBuilder();
+    final TestFixtureBuilder<IdeaProjectTestFixture> testFixtureBuilder = fixtureFactory.createFixtureBuilder("FixtureBuilder");
 
     myFixture = fixtureFactory.createCodeInsightFixture(testFixtureBuilder.getFixture());
     myFixture.setTestDataPath(new File("").getAbsolutePath() + File.separatorChar + getTestDataPath());

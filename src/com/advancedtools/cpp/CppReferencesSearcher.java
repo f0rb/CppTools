@@ -28,8 +28,9 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.intellij.util.QueryExecutor;
-import com.intellij.util.containers.HashSet;
+import com.intellij.util.containers.hash.HashSet;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -84,7 +85,8 @@ public class CppReferencesSearcher implements QueryExecutor<PsiReference, Refere
     });
   }
 
-  public boolean execute(final ReferencesSearch.SearchParameters params, final Processor<PsiReference> processor) {
+  @Override
+  public boolean execute(@NotNull final ReferencesSearch.SearchParameters params, @NotNull final Processor<? super PsiReference> processor) {
     final PsiElement target = params.getElementToSearch();
 
     if (target instanceof CppElement || target instanceof CppKeyword /*operator*/) {
@@ -148,7 +150,7 @@ public class CppReferencesSearcher implements QueryExecutor<PsiReference, Refere
   }
 
   private boolean doFindRefsInCppCode(final PsiFile psiFile, PsiElement target, ReferencesSearch.SearchParameters params,
-                                      GlobalSearchScope globalScope, final Processor<PsiReference> processor) {
+                                      GlobalSearchScope globalScope, final Processor<? super PsiReference> processor) {
     final Project project = psiFile.getProject();
     final String commandName = project.getUserData(ourKey);
     final int offset;
@@ -192,7 +194,7 @@ public class CppReferencesSearcher implements QueryExecutor<PsiReference, Refere
     if (count == 0) return true;
 
     final boolean scopeIsLocal = params.getScope() instanceof LocalSearchScope;
-    final Set<VirtualFile> localScope = scopeIsLocal ? new HashSet<VirtualFile>() : null;
+    final Set<VirtualFile> localScope = scopeIsLocal ? new HashSet<>() : null;
 
     if (scopeIsLocal) {
       for(PsiElement e: ((LocalSearchScope)params.getScope()).getScope()) {

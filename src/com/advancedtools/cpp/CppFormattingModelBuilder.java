@@ -45,8 +45,9 @@ public class CppFormattingModelBuilder implements FormattingModelBuilder {
         return myModel.replaceWhiteSpace(textRange, whiteSpace);
       }
 
-      public TextRange shiftIndentInsideRange(TextRange range, int indent) {
-        return myModel.shiftIndentInsideRange(range, indent);
+      @Override
+      public TextRange shiftIndentInsideRange(ASTNode astNode, TextRange range, int indent) {
+        return myModel.shiftIndentInsideRange(astNode, range, indent);
       }
 
       public void commitChanges() {

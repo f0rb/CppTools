@@ -92,7 +92,7 @@ public class CppCompiler implements Validator {
 
                   if (result != null) {
                     CompilerMessageCategory category = result.isError() ? CompilerMessageCategory.ERROR : CompilerMessageCategory.WARNING;
-                    String message = s.substring(result.highlightEndOffset + 1);
+                    String message = s.substring(result.getHighlightEndOffset() + 1);
                     compileContext.addMessage(category, message, result.file.getUrl(), result.line, result.column);
                     return;
                   }
